@@ -30,12 +30,13 @@ public class UserAuthEndpoint {
         }
     }
 
+@PostMapping("/register")
+public String register(@ModelAttribute UserDataEntity entity, RedirectAttributes redirectAttributes) {
+    // UserDataService를 사용하여 사용자 데이터 저장
+    userDataService.saveUserData(entity);
 
-    @PostMapping("/register")
-    public void register(@ModelAttribute UserDataEntity entity) {
-        // 유저 회원가입을 구현하십시오.
-        // 해당 메서드를 작성하기 위해서는, UserDataService와 admin_dashboard.html을 참고하십시오.
-        // 해당 메서드는 register.html에서 사용됩니다.
-        throw new IllegalStateException("Not implemented yet");
-    }
+    // 저장 후, admin_dashboard로 리다이렉션하고 성공 메시지를 전달
+    redirectAttributes.addAttribute("success", "true");
+    return "redirect:/admin_dashboard";
+ }
 }
